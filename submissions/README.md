@@ -259,3 +259,7 @@ This library provides simple CSS-based animations that can be applied using util
 ```bash
 npm install ease-motion-css
 ```
+
+## Community Submissions Tracker (ECSoC 2026)
+
+*   [ease-focus-pulse-btn-bb](./examples/ease-focus-pulse-btn-bb/demo.html) - ECSoC_2026: Add keyboard-accessible focus-ring pulse button component
