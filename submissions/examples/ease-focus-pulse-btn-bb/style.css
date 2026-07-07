@@ -1,0 +1,42 @@
+.demo-container {
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #111;
+  color: #fff;
+  min-height: 100vh;
+  justify-content: center;
+}
+.focus-pulse-btn {
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #6366f1;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  outline: none;
+}
+.focus-pulse-btn:hover {
+  background-color: #4f46e5;
+}
+.focus-pulse-btn:active {
+  transform: scale(0.98);
+}
+.focus-pulse-btn:focus-visible {
+  animation: focus-ring-ripple 1.5s infinite ease-in-out;
+}
+@keyframes focus-ring-ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+  }
+}
