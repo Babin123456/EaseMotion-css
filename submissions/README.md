@@ -259,3 +259,7 @@ This library provides simple CSS-based animations that can be applied using util
 ```bash
 npm install ease-motion-css
 ```
+
+## Community Submissions Tracker (ECSoC 2026)
+
+*   [ease-text-reveal-flicker-bb](./examples/ease-text-reveal-flicker-bb/demo.html) - ECSoC_2026: Add typing text reveal animation with interactive flicker effects
