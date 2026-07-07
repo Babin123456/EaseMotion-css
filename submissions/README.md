@@ -259,3 +259,7 @@ This library provides simple CSS-based animations that can be applied using util
 ```bash
 npm install ease-motion-css
 ```
+
+## Community Submissions Tracker (ECSoC 2026)
+
+*   [ease-staggered-timeline-bb](./examples/ease-staggered-timeline-bb/demo.html) - ECSoC_2026: Add staggered reveal timeline component with slide-fade transition
