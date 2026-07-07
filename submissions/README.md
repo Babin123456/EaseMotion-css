@@ -259,3 +259,7 @@ This library provides simple CSS-based animations that can be applied using util
 ```bash
 npm install ease-motion-css
 ```
+
+## Community Submissions Tracker (ECSoC 2026)
+
+*   [ease-holographic-glass-card-bb](./examples/ease-holographic-glass-card-bb/demo.html) - ECSoC_2026: Add holographic glassmorphism card animation with interactive sheen shift
