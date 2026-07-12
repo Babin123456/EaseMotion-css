@@ -1,0 +1,152 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1a1a24;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.container {
+    perspective: 1000px;
+}
+
+.cassette {
+    width: 320px;
+    height: 200px;
+    background: #3a3a44;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 
+        inset 0 4px 0 rgba(255,255,255,0.1),
+        inset 0 -4px 0 rgba(0,0,0,0.5),
+        0 15px 35px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: rotateX(10deg) rotateZ(-2deg);
+    transition: transform 0.3s ease;
+}
+
+.cassette:hover {
+    transform: rotateX(0deg) rotateZ(0deg) scale(1.05);
+}
+
+.cassette-label {
+    width: 260px;
+    height: 120px;
+    background: #f4e8c1;
+    border-radius: 8px;
+    position: absolute;
+    top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.label-text {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+    letter-spacing: 2px;
+    z-index: 2;
+    background: #f4e8c1;
+    padding: 0 10px;
+    border: 1px solid #ccc;
+}
+
+.label-gradient {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(135deg, #ff7b00, #ff007b, #7b00ff);
+    animation: gradientWobble 4s ease-in-out infinite alternate;
+}
+
+@keyframes gradientWobble {
+    0% { filter: hue-rotate(0deg); transform: scaleY(1); }
+    100% { filter: hue-rotate(45deg); transform: scaleY(1.1); }
+}
+
+.cassette-window {
+    width: 160px;
+    height: 50px;
+    background: #111;
+    border-radius: 25px;
+    position: absolute;
+    top: 65px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.8);
+    z-index: 3;
+    border: 2px solid #555;
+}
+
+.tape-spool {
+    width: 40px;
+    height: 40px;
+    background: #ddd;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    animation: spin 3s linear infinite;
+}
+
+.spool-center {
+    width: 15px;
+    height: 15px;
+    background: #222;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.spool-spokes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: repeating-conic-gradient(
+        from 0deg,
+        transparent 0deg 60deg,
+        #999 60deg 120deg
+    );
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+/* Screws */
+.cassette-screws {
+    width: 8px;
+    height: 8px;
+    background: #222;
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: inset 1px 1px 2px rgba(255,255,255,0.3);
+}
+
+.cassette-screws::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 1px;
+    width: 6px;
+    height: 2px;
+    background: #111;
+    transform: rotate(45deg);
+}
+
+.top-left { top: 10px; left: 10px; }
+.top-right { top: 10px; right: 10px; }
+.bottom-left { bottom: 10px; left: 10px; }
+.bottom-right { bottom: 10px; right: 10px; }
