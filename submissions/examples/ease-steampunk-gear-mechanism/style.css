@@ -1,0 +1,101 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2b1f1c;
+}
+
+.mechanism-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.gear {
+    position: absolute;
+    background: radial-gradient(circle, #b8860b 30%, #8b6508 70%);
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 0 10px rgba(0,0,0,0.8),
+        0 5px 15px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Creating gear teeth using a repeating conic gradient on a pseudo element */
+.gear::before {
+    content: '';
+    position: absolute;
+    width: 115%;
+    height: 115%;
+    border-radius: 50%;
+    background: repeating-conic-gradient(
+        from 0deg,
+        transparent 0deg 10deg,
+        #8b6508 10deg 20deg
+    );
+    z-index: -1;
+    top: -7.5%;
+    left: -7.5%;
+}
+
+.gear-inner {
+    width: 60%;
+    height: 60%;
+    background: #2b1f1c;
+    border-radius: 50%;
+    box-shadow: 
+        inset 0 5px 10px rgba(0,0,0,0.8),
+        0 0 5px rgba(255,255,255,0.2);
+    position: relative;
+}
+
+.gear-inner::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 30%;
+    background: radial-gradient(circle, #d4af37, #b8860b);
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.gear-large {
+    width: 150px;
+    height: 150px;
+    top: 20px;
+    left: 20px;
+    animation: rotate-cw 10s linear infinite;
+}
+
+.gear-small {
+    width: 80px;
+    height: 80px;
+    top: 135px;
+    left: 155px;
+    animation: rotate-ccw 5.33s linear infinite;
+}
+
+.gear-medium {
+    width: 110px;
+    height: 110px;
+    top: 170px;
+    left: 50px;
+    animation: rotate-ccw 7.33s linear infinite;
+}
+
+@keyframes rotate-cw {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes rotate-ccw {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(-360deg); }
+}
