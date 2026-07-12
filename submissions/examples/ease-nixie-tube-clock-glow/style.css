@@ -1,0 +1,113 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0a0a0a;
+    font-family: sans-serif;
+}
+
+.clock-container {
+    display: flex;
+    gap: 20px;
+}
+
+.tube {
+    position: relative;
+    width: 60px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.glass {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.3) 20%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.2) 80%, rgba(255,255,255,0.1) 100%);
+    border-radius: 30px 30px 10px 10px;
+    box-shadow: 
+        inset 0 0 10px rgba(0,0,0,0.8),
+        inset 0 0 2px rgba(255,150,50,0.2),
+        0 0 20px rgba(255,100,0,0.1);
+    z-index: 10;
+    backdrop-filter: blur(1px);
+}
+
+.mesh {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 50px;
+    height: 90px;
+    background-image: 
+        linear-gradient(rgba(0,0,0,0.4) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,0.4) 1px, transparent 1px);
+    background-size: 3px 3px;
+    border-radius: 25px 25px 8px 8px;
+    z-index: 2;
+    opacity: 0.5;
+}
+
+.digit {
+    position: absolute;
+    font-size: 64px;
+    font-family: 'Wire One', sans-serif; /* Fallback for thin glowing font */
+    font-weight: 100;
+}
+
+.digit-back {
+    color: rgba(255, 100, 0, 0.1);
+    z-index: 3;
+    transform: scale(0.9);
+}
+
+.digit-front {
+    color: #ffd700;
+    z-index: 5;
+    text-shadow: 
+        0 0 5px #ff4500,
+        0 0 10px #ff4500,
+        0 0 20px #ff4500,
+        0 0 40px #ff0000;
+    animation: flicker 3s infinite alternate;
+}
+
+@keyframes flicker {
+    0%, 100% { opacity: 1; text-shadow: 0 0 5px #ff4500, 0 0 10px #ff4500, 0 0 20px #ff4500, 0 0 40px #ff0000; }
+    90% { opacity: 0.95; }
+    92% { opacity: 0.8; text-shadow: 0 0 2px #ff4500, 0 0 5px #ff4500; }
+    94% { opacity: 1; }
+    96% { opacity: 0.7; }
+    98% { opacity: 1; }
+}
+
+.base {
+    position: absolute;
+    bottom: 5px;
+    width: 50px;
+    height: 15px;
+    background: #222;
+    border-radius: 5px;
+    border-top: 2px solid #444;
+    z-index: 15;
+}
+
+.pins {
+    position: absolute;
+    bottom: 0;
+    width: 30px;
+    height: 5px;
+    background: repeating-linear-gradient(
+        90deg,
+        #888,
+        #888 2px,
+        transparent 2px,
+        transparent 6px
+    );
+    z-index: 1;
+}
