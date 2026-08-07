@@ -1,0 +1,230 @@
+:root {
+  --bg-dark: #050508;
+  --term-bg: #0c0d14;
+  --neon-cyan: #00f3ff;
+  --neon-pink: #ff0055;
+  --neon-green: #00ff66;
+  --font-code: 'Fira Code', monospace;
+  --font-title: 'Orbitron', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: #a9b1d6;
+  font-family: var(--font-code);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(0, 243, 255, 0.08) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 100% 100%, 24px 24px, 24px 24px;
+}
+
+.terminal-wrapper {
+  max-width: 760px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.terminal-header-title {
+  text-align: center;
+}
+
+.glow-title {
+  font-family: var(--font-title);
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+  margin-bottom: 0.5rem;
+}
+
+.glow-subtitle {
+  font-size: 0.85rem;
+  color: #7aa2f7;
+}
+
+.terminal-window {
+  width: 100%;
+  background-color: var(--term-bg);
+  border: 1px solid rgba(0, 243, 255, 0.3);
+  border-radius: 12px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 243, 255, 0.15);
+  overflow: hidden;
+  position: relative;
+}
+
+.terminal-bar {
+  background: #16161e;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+.bar-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.btn-close { background-color: #f7768e; }
+.btn-minimize { background-color: #e0af68; }
+.btn-maximize { background-color: #9ece6a; }
+
+.bar-title {
+  font-size: 0.8rem;
+  color: #7aa2f7;
+  letter-spacing: 1px;
+}
+
+.bar-status {
+  font-size: 0.7rem;
+  color: var(--neon-cyan);
+  background: rgba(0, 243, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 243, 255, 0.3);
+}
+
+.terminal-body {
+  padding: 1.5rem;
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.crt-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 243, 255, 0),
+    rgba(0, 243, 255, 0.08),
+    rgba(0, 243, 255, 0)
+  );
+  animation: scanline-move 8s linear infinite;
+  pointer-events: none;
+  z-index: 11;
+}
+
+.code-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+}
+
+.prompt {
+  color: var(--neon-pink);
+  font-weight: 700;
+}
+
+.command {
+  color: #bb9af7;
+}
+
+.typewriter {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--neon-cyan);
+  animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+.code-output {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.85rem;
+  padding-left: 1rem;
+  border-left: 2px solid rgba(122, 162, 247, 0.2);
+}
+
+.output-row.info { color: #7dcfff; }
+.output-row.success { color: var(--neon-green); }
+.output-row.warning { color: #e0af68; }
+
+.snippet-block {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+pre code {
+  color: #a9b1d6;
+}
+
+.keyword { color: var(--neon-pink); font-weight: 700; }
+.variable { color: #7dcfff; }
+.property { color: #7aa2f7; }
+.string { color: var(--neon-green); }
+
+.blinking-cursor {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background-color: var(--neon-cyan);
+  box-shadow: 0 0 8px var(--neon-cyan);
+  animation: pulse-cursor 1s infinite;
+}
+
+@keyframes scanline-move {
+  0% { top: -80px; }
+  100% { top: 100%; }
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--neon-cyan); }
+}
+
+@keyframes pulse-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
