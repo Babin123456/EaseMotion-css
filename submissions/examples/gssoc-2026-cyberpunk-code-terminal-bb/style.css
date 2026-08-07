@@ -1,118 +1,152 @@
-/* Cyberpunk Code Block Terminal Showcase Styles */
 :root {
-  --term-bg: #0d1117;
-  --term-border: #30363d;
-  --neon-cyan: #00f0ff;
-  --neon-pink: #ff007f;
-  --neon-green: #00ff66;
-  --text-code: #c9d1d9;
+  --term-bg: #0b0f19;
+  --term-header: #141c2e;
+  --term-border: rgba(99, 102, 241, 0.25);
+  --text-code: #e2e8f0;
+  --syn-keyword: #ff0055;
+  --syn-entity: #00f3ff;
+  --syn-string: #10b981;
+  --syn-property: #c084fc;
+  --syn-number: #f59e0b;
+  --syn-boolean: #38bdf8;
+  --radius-term: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Fira Code', Consolas, Monaco, monospace;
-  background-color: #050811;
+  background-color: #030712;
   color: var(--text-code);
+  font-family: 'Fira Code', monospace;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 2rem;
 }
 
-.terminal-container {
-  width: 90%;
+.terminal-wrapper {
   max-width: 720px;
+  width: 100%;
+}
+
+.terminal-window {
+  background: var(--term-bg);
+  border: 1px solid var(--term-border);
+  border-radius: var(--radius-term);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(99, 102, 241, 0.15);
 }
 
 .terminal-header {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-family: system-ui, sans-serif;
-}
-
-.terminal-title {
-  font-size: 2.2rem;
-  color: var(--neon-cyan);
-  text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
-  margin-bottom: 0.5rem;
-}
-
-.terminal-subtitle {
-  color: #8b949e;
-}
-
-.code-terminal-window {
-  position: relative;
-  background-color: var(--term-bg);
-  border: 1px solid var(--term-border);
-  border-radius: 12px;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 240, 255, 0.15);
-  overflow: hidden;
-}
-
-.terminal-top-bar {
+  background: var(--term-header);
+  padding: 0.75rem 1.25rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1rem;
-  background: #161b22;
-  border-bottom: 1px solid var(--term-border);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.window-buttons {
+.window-controls {
   display: flex;
-  gap: 6px;
+  gap: 0.5rem;
 }
 
-.btn-dot {
-  width: 10px;
-  height: 10px;
+.control {
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
 }
 
-.btn-dot.close { background: #ff5f56; }
-.btn-dot.minimize { background: #ffbd2e; }
-.btn-dot.maximize { background: #27c93f; }
+.control.close { background: #ef4444; }
+.control.minimize { background: #f59e0b; }
+.control.maximize { background: #10b981; }
 
-.terminal-filename {
-  font-size: 0.85rem;
-  color: #8b949e;
+.terminal-title {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  font-weight: 500;
 }
 
-.copy-code-btn {
+.terminal-badge {
+  font-size: 0.7rem;
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+}
+
+.terminal-body {
   display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--term-border);
-  color: var(--text-code);
-  padding: 4px 10px;
-  border-radius: 6px;
+  padding: 1.5rem;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.line-numbers {
+  display: flex;
+  flex-direction: column;
+  color: #475569;
+  padding-right: 1.25rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  user-select: none;
+}
+
+.code-content {
+  padding-left: 1.25rem;
+  width: 100%;
+}
+
+.indent {
+  padding-left: 1.5rem;
+}
+
+.keyword { color: var(--syn-keyword); font-weight: 600; }
+.entity { color: var(--syn-entity); }
+.string { color: var(--syn-string); }
+.property { color: var(--syn-property); }
+.number { color: var(--syn-number); }
+.boolean { color: var(--syn-boolean); }
+
+.cursor-blink {
+  display: inline-block;
+  width: 8px;
+  height: 1.1em;
+  background: var(--syn-entity);
+  vertical-align: middle;
+  margin-left: 4px;
+  animation: blink 1s infinite steps(2, start);
+}
+
+.terminal-footer {
+  background: var(--term-header);
+  padding: 0.4rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
   font-size: 0.75rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  color: #64748b;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.copy-code-btn:hover,
-.copy-code-btn.copied {
-  border-color: var(--neon-cyan);
-  color: var(--neon-cyan);
-  box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+.status-mode {
+  background: var(--syn-keyword);
+  color: #ffffff;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  font-weight: 700;
 }
 
-.terminal-code-body {
-  padding: 1.25rem;
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.6;
-  overflow-x: auto;
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-.syn-keyword { color: var(--neon-pink); font-weight: 600; }
-.syn-func { color: var(--neon-cyan); }
-.syn-str { color: var(--neon-green); }
-.syn-comment { color: #8b949e; font-style: italic; }
-.syn-prop { color: #79c0ff; }
-.syn-num { color: #d2a8ff; }
-.syn-builtin { color: #ffa657; }
+@media (prefers-reduced-motion: reduce) {
+  .cursor-blink {
+    animation: none;
+  }
+}
