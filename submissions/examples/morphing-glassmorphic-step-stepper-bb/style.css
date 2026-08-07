@@ -1,0 +1,207 @@
+:root {
+  --bg-dark: #0a0d16;
+  --panel-bg: rgba(17, 24, 39, 0.7);
+  --accent-cyan: #06b6d4;
+  --accent-emerald: #10b981;
+  --font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: #f1f5f9;
+  font-family: var(--font-family);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-image: 
+    radial-gradient(ellipse at 50% 30%, rgba(6, 182, 212, 0.12) 0%, transparent 60%);
+}
+
+.stepper-wrapper {
+  max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.stepper-header {
+  text-align: center;
+}
+
+.step-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--accent-cyan);
+  background: rgba(6, 182, 212, 0.12);
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.stepper-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.4rem;
+}
+
+.stepper-subtitle {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+.stepper-container {
+  background: var(--panel-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.step-node {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  cursor: pointer;
+}
+
+.node-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1rem;
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.step-node.completed .node-circle {
+  background: var(--accent-emerald);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+}
+
+.step-node.active .node-circle {
+  background: var(--accent-cyan);
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(6, 182, 212, 0.6);
+  transform: scale(1.15);
+}
+
+.step-node.pending .node-circle {
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  color: #64748b;
+}
+
+.active-pulse-ring {
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-cyan);
+  animation: pulse-ring 2s infinite ease-out;
+}
+
+.node-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.node-step {
+  font-size: 0.75rem;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.node-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.step-node.pending .node-title {
+  color: #64748b;
+}
+
+.connector {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 16px;
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.connector.completed-connector {
+  background: var(--accent-emerald);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.connector-glow {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  animation: connector-flow 3s infinite linear;
+}
+
+.step-card-preview {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  border-radius: 18px;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+
+.preview-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  margin-bottom: 0.4rem;
+}
+
+.preview-desc {
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.85); opacity: 1; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+@keyframes connector-flow {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}

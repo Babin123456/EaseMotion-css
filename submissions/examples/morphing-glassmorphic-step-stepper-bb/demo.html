@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Morphing Glassmorphic Step Stepper - EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="stepper-wrapper">
+    <div class="stepper-header">
+      <span class="step-badge">CHECKOUT FLOW</span>
+      <h1 class="stepper-title">Morphing Glass Stepper</h1>
+      <p class="stepper-subtitle">Pure CSS multi-step navigation indicator with glowing connector lines & active node morphing</p>
+    </div>
+
+    <div class="stepper-container">
+      <div class="step-node completed">
+        <div class="node-circle">
+          <span class="node-icon">✓</span>
+        </div>
+        <div class="node-details">
+          <span class="node-step">STEP 01</span>
+          <span class="node-title">Account Setup</span>
+        </div>
+      </div>
+
+      <div class="connector completed-connector">
+        <div class="connector-glow"></div>
+      </div>
+
+      <div class="step-node active">
+        <div class="node-circle">
+          <span class="node-number">02</span>
+          <div class="active-pulse-ring"></div>
+        </div>
+        <div class="node-details">
+          <span class="node-step">STEP 02</span>
+          <span class="node-title">Payment Method</span>
+        </div>
+      </div>
+
+      <div class="connector">
+        <div class="connector-glow"></div>
+      </div>
+
+      <div class="step-node pending">
+        <div class="node-circle">
+          <span class="node-number">03</span>
+        </div>
+        <div class="node-details">
+          <span class="node-step">STEP 03</span>
+          <span class="node-title">Order Review</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-card-preview">
+      <div class="card-glow"></div>
+      <h3 class="preview-title">Step 2: Enter Credit Card Info</h3>
+      <p class="preview-desc">Transactions are encrypted with 256-bit SSL protocols. Instant confirmation guaranteed.</p>
+    </div>
+  </div>
+</body>
+</html>
