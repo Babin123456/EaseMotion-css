@@ -1,0 +1,196 @@
+/* EaseMotion Interactive Animated Stepper Process Bar Styles */
+:root {
+  --bg-dark: #0b0f19;
+  --card-bg: rgba(23, 32, 54, 0.7);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --node-bg: #1e293b;
+  --node-border: rgba(255, 255, 255, 0.2);
+  --accent-cyan: #38bdf8;
+  --accent-green: #10b981;
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 4rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.demo-wrapper {
+  max-width: 900px;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 9999px;
+  color: var(--accent-cyan);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.header p {
+  color: var(--text-sub);
+  font-size: 1.1rem;
+}
+
+.stepper-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1.5rem;
+  padding: 3rem 2rem;
+  backdrop-filter: blur(16px);
+}
+
+/* Stepper Track */
+.stepper-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3.5rem;
+}
+
+.stepper-track::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.progress-fill {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  width: 45%;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+  z-index: 2;
+  box-shadow: 0 0 12px var(--accent-cyan);
+  transition: width 0.6s var(--ease-smooth);
+}
+
+.step-item {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.step-node {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--node-bg);
+  border: 2px solid var(--node-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text-sub);
+  margin-bottom: 0.75rem;
+  transition: all 0.5s var(--ease-bounce);
+}
+
+.step-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-sub);
+  transition: color 0.3s ease;
+}
+
+/* Step States */
+.step-completed .step-node {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+}
+
+.step-completed .step-label {
+  color: var(--text-main);
+}
+
+.step-active .step-node {
+  background: var(--bg-dark);
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+  animation: stepPulse 2s infinite alternate;
+}
+
+.step-active .step-label {
+  color: var(--accent-cyan);
+}
+
+@keyframes stepPulse {
+  0% { box-shadow: 0 0 10px rgba(56, 189, 248, 0.4); }
+  100% { box-shadow: 0 0 25px rgba(56, 189, 248, 0.9); }
+}
+
+.step-item:hover .step-node {
+  transform: translateY(-3px) scale(1.1);
+}
+
+/* Step Content Body */
+.step-content {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+
+.step-content h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.step-content p {
+  color: var(--text-sub);
+  line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .header h1 { font-size: 2rem; }
+  .step-label { font-size: 0.75rem; }
+  .step-node { width: 40px; height: 40px; font-size: 0.9rem; }
+  .stepper-track::before, .progress-fill { top: 18px; }
+}
