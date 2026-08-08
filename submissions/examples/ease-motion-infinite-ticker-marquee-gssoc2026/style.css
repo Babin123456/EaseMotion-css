@@ -1,0 +1,139 @@
+/* EaseMotion Infinite Ticker Marquee Banner Styles */
+:root {
+  --bg-dark: #090d16;
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --card-border: rgba(255, 255, 255, 0.12);
+  --text-primary: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-cyan: #38bdf8;
+  --accent-indigo: #818cf8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  min-height: 100vh;
+  padding: 4rem 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.demo-wrapper {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 3.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 9999px;
+  color: var(--accent-cyan);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.header p {
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+/* Marquee Structure */
+.marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem 0;
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.margin-top {
+  margin-top: 1.5rem;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 1.5rem;
+}
+
+.track-left {
+  animation: marqueeLeft 25s linear infinite;
+}
+
+.track-right {
+  animation: marqueeRight 25s linear infinite;
+}
+
+.marquee-content {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.marquee-card {
+  padding: 1rem 1.75rem;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
+  white-space: nowrap;
+  color: var(--text-primary);
+  transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+}
+
+.pill-card {
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+  color: var(--accent-indigo);
+}
+
+/* Pause on Hover */
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-card:hover {
+  transform: scale(1.08);
+  border-color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.15);
+}
+
+@keyframes marqueeLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marqueeRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+@media (max-width: 640px) {
+  .header h1 { font-size: 2rem; }
+}
