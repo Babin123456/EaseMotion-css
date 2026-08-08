@@ -1,0 +1,200 @@
+/* EaseMotion Glowing Neon Cyberpunk Pricing Table Styles */
+:root {
+  --bg-deep: #080c16;
+  --card-bg: rgba(15, 23, 42, 0.7);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --neon-cyan: #00f2fe;
+  --neon-pink: #4facfe;
+  --ease-elastic: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 4rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.demo-wrapper {
+  max-width: 950px;
+  width: 100%;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  background: rgba(0, 242, 254, 0.12);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  border-radius: 9999px;
+  color: var(--neon-cyan);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.header h1 {
+  font-size: 2.75rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.header p {
+  color: var(--text-sub);
+  font-size: 1.1rem;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.price-card {
+  position: relative;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1.5rem;
+  padding: 2.5rem 2rem;
+  backdrop-filter: blur(16px);
+  transition: transform 0.5s var(--ease-elastic), box-shadow 0.5s var(--ease-smooth);
+}
+
+.featured {
+  border-color: transparent;
+  transform: scale(1.05);
+}
+
+.neon-glow-border {
+  position: absolute;
+  inset: -2px;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+  z-index: 1;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 15px rgba(0, 242, 254, 0.5));
+  animation: neonPulse 4s ease infinite alternate;
+}
+
+@keyframes neonPulse {
+  0% { opacity: 0.6; filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.4)); }
+  100% { opacity: 1; filter: drop-shadow(0 0 25px rgba(79, 172, 254, 0.8)); }
+}
+
+.card-content {
+  position: relative;
+  z-index: 2;
+  background: rgba(15, 23, 42, 0.95);
+  border-radius: 1.35rem;
+  padding: 2rem 1.5rem;
+  height: 100%;
+}
+
+.popular-tag {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+  color: #0f172a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.plan-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.plan-price {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.plan-price span {
+  font-size: 1.1rem;
+  color: var(--text-sub);
+  font-weight: 400;
+}
+
+.plan-desc {
+  color: var(--text-sub);
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+  line-height: 1.5;
+}
+
+.feature-list {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+.feature-list li {
+  margin-bottom: 0.75rem;
+  color: var(--text-main);
+  font-size: 0.95rem;
+}
+
+.btn {
+  display: block;
+  text-align: center;
+  padding: 0.85rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.35s var(--ease-smooth);
+}
+
+.btn-outline {
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+.btn-neon {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+  color: #0f172a;
+}
+
+.btn-neon:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+}
+
+.price-card:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+
+.featured:hover {
+  transform: translateY(-8px) scale(1.07);
+}
+
+@media (max-width: 640px) {
+  .header h1 { font-size: 2rem; }
+  .featured { transform: scale(1); }
+}
