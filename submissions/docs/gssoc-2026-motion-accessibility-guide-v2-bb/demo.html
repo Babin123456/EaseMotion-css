@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Motion Accessibility Guide - EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="guide-wrapper">
+    <header class="guide-header">
+      <span class="badge">GSSoC 2026 Documentation</span>
+      <h1>CSS Motion & Accessibility Standards</h1>
+      <p>Comprehensive guide to implementing WCAG 2.1 compliant motion effects with forced reduced motion overrides.</p>
+    </header>
+
+    <div class="guide-card" tabindex="0">
+      <div class="card-header">
+        <span class="a11y-badge">WCAG 2.1 AAA</span>
+        <h2>Reduced Motion Media Query Implementation</h2>
+      </div>
+      <p>Always wrap heavy continuous animation keyframes inside `@media (prefers-reduced-motion: no-preference)` to respect user operating system settings.</p>
+
+      <div class="demo-box">
+        <div class="animated-spinner"></div>
+        <span class="demo-text">Hover or focus to inspect reduced motion handling.</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
