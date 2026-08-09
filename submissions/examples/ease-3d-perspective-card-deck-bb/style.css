@@ -1,0 +1,149 @@
+:root {
+  --bg-dark: #090a12;
+  --card-bg: rgba(17, 24, 39, 0.75);
+  --card-border: rgba(99, 102, 241, 0.3);
+  --accent-indigo: #6366f1;
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--bg-dark);
+  background-image: radial-gradient(circle at 50% 30%, rgba(99, 102, 241, 0.15), transparent 60%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.deck-wrapper {
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+
+.deck-header {
+  margin-bottom: 3.5rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  color: #818cf8;
+  margin-bottom: 0.75rem;
+}
+
+.deck-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.deck-header p {
+  color: var(--text-sub);
+}
+
+.deck-container {
+  position: relative;
+  height: 280px;
+  perspective: 1000px;
+  display: flex;
+  justify-content: center;
+}
+
+.p-card {
+  position: absolute;
+  width: 320px;
+  height: 200px;
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  outline: none;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.card-top {
+  transform: translateY(0) rotateX(10deg) translateZ(40px);
+  z-index: 3;
+}
+
+.card-mid {
+  transform: translateY(30px) rotateX(10deg) translateZ(0px) scale(0.95);
+  z-index: 2;
+  opacity: 0.85;
+}
+
+.card-bot {
+  transform: translateY(60px) rotateX(10deg) translateZ(-40px) scale(0.9);
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.p-card:hover, .p-card:focus-visible {
+  transform: translateY(-20px) rotateX(0deg) translateZ(80px) scale(1.05) !important;
+  z-index: 10 !important;
+  opacity: 1 !important;
+  border-color: rgba(99, 102, 241, 0.7);
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.8), 0 0 30px rgba(99, 102, 241, 0.3);
+}
+
+.sheen {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transform: rotate(30deg);
+  transition: transform 0.6s ease;
+}
+
+.p-card:hover .sheen {
+  transform: rotate(30deg) translateY(30%);
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  text-align: left;
+}
+
+.card-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent-indigo);
+  letter-spacing: 1px;
+}
+
+.card-content h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-sub);
+}
