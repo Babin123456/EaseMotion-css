@@ -1,0 +1,152 @@
+:root {
+  --bg-dark: #05070f;
+  --card-bg: rgba(15, 23, 42, 0.7);
+  --neon-green: #10b981;
+  --neon-amber: #f59e0b;
+  --neon-red: #ef4444;
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-dark);
+  background-image: 
+    linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.badge-wrapper {
+  max-width: 580px;
+  width: 100%;
+  text-align: center;
+}
+
+.badge-header {
+  margin-bottom: 3rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  color: #34d399;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.75rem;
+}
+
+.badge-header h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.badge-header p {
+  color: var(--text-sub);
+}
+
+.badge-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.glitch-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0.75rem 1.5rem;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+  font-family: 'Fira Code', monospace;
+  transition: all 0.3s ease;
+  width: 320px;
+}
+
+.badge-green {
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+}
+
+.badge-amber {
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+}
+
+.badge-red {
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.15);
+}
+
+.glitch-badge:hover, .glitch-badge:focus-visible {
+  transform: translateY(-2px);
+}
+
+.badge-green:hover { box-shadow: 0 0 25px rgba(16, 185, 129, 0.4); border-color: #34d399; }
+.badge-amber:hover { box-shadow: 0 0 25px rgba(245, 158, 11, 0.4); border-color: #fbbf24; }
+.badge-red:hover { box-shadow: 0 0 25px rgba(239, 68, 68, 0.4); border-color: #f87171; }
+
+.badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.badge-green .badge-dot { background: var(--neon-green); box-shadow: 0 0 10px var(--neon-green); }
+.badge-amber .badge-dot { background: var(--neon-amber); box-shadow: 0 0 10px var(--neon-amber); }
+.badge-red .badge-dot { background: var(--neon-red); box-shadow: 0 0 10px var(--neon-red); }
+
+.badge-text {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: left;
+  position: relative;
+}
+
+.glitch-badge:hover .badge-text::before,
+.glitch-badge:focus-visible .badge-text::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -2px 0 #00ffff;
+  clip-path: inset(20% 0 30% 0);
+  animation: glitchSlice 0.3s ease infinite alternate-reverse;
+}
+
+@keyframes glitchSlice {
+  0% { clip-path: inset(10% 0 60% 0); }
+  100% { clip-path: inset(50% 0 10% 0); }
+}
+
+.badge-code {
+  font-size: 0.7rem;
+  color: var(--text-sub);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cyberpunk Glitch Status Badge - EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="badge-wrapper">
+    <header class="badge-header">
+      <span class="badge">GSSoC 2026 Component</span>
+      <h1>Cyberpunk Glitch Status Badges</h1>
+      <p>Micro-interaction status pills with clip-path glitch displacement, scanline overlays, and neon pulse aura.</p>
+    </header>
+
+    <div class="badge-grid">
+      <!-- Badge 1: Operational -->
+      <div class="glitch-badge badge-green" tabindex="0" role="status">
+        <span class="badge-dot"></span>
+        <span class="badge-text" data-text="SYSTEM OPERATIONAL">SYSTEM OPERATIONAL</span>
+        <span class="badge-code">SYS_OK</span>
+      </div>
+
+      <!-- Badge 2: Warning -->
+      <div class="glitch-badge badge-amber" tabindex="0" role="status">
+        <span class="badge-dot"></span>
+        <span class="badge-text" data-text="HIGH LATENCY">HIGH LATENCY</span>
+        <span class="badge-code">WARN_99</span>
+      </div>
+
+      <!-- Badge 3: Critical -->
+      <div class="glitch-badge badge-red" tabindex="0" role="status">
+        <span class="badge-dot"></span>
+        <span class="badge-text" data-text="FIREWALL BREACH">FIREWALL BREACH</span>
+        <span class="badge-code">ERR_505</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
