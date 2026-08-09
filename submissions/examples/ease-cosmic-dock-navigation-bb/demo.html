@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cosmic Dock Navigation - EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="dock-wrapper">
+    <header class="dock-header">
+      <span class="badge">GSSoC 2026 Component</span>
+      <h1>Cosmic Dock Navigation</h1>
+      <p>A floating glassmorphic orbital dock bar with starfield particle aura, active planet rings, and tooltip popups.</p>
+    </header>
+
+    <nav class="cosmic-dock" aria-label="Cosmic Dock Navigation">
+      <a href="#" class="dock-node active" aria-label="Solar System" tabindex="0">
+        <span class="tooltip">Solar Core</span>
+        <span class="icon">☀️</span>
+        <div class="orbital-ring"></div>
+      </a>
+      <a href="#" class="dock-node" aria-label="Orbital Station" tabindex="0">
+        <span class="tooltip">Station</span>
+        <span class="icon">🪐</span>
+        <div class="orbital-ring"></div>
+      </a>
+      <a href="#" class="dock-node" aria-label="Deep Space" tabindex="0">
+        <span class="tooltip">Deep Space</span>
+        <span class="icon">🌌</span>
+        <div class="orbital-ring"></div>
+      </a>
+      <div class="dock-sep"></div>
+      <a href="#" class="dock-node" aria-label="Telemetry" tabindex="0">
+        <span class="tooltip">Telemetry</span>
+        <span class="icon">📡</span>
+        <div class="orbital-ring"></div>
+      </a>
+    </nav>
+  </div>
+</body>
+</html>
