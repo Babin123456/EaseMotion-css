@@ -1,25 +1,28 @@
-# Holographic Glassmorphism Card Deck
+# Holographic Glassmorphism Card Deck Component
 
-A hardware-accelerated 3D glassmorphic card deck featuring multi-spectral holographic shimmer highlights and interactive perspective tilt transitions.
+An interactive 3D holographic tilt card deck component built with pure CSS hardware acceleration, dynamic glare reflection tracking, theme switching tokens, category filtering, and full accessibility support for EaseMotion-css.
 
-## 1. What does this do?
-This component renders an interactive stacked card deck styled with backdrop blur, semi-transparent borders, and dynamic holographic color dodge shimmer reflections that activate on hover and keyboard focus.
+## What does this do?
+This component provides a sleek, futuristic 3D card layout with backdrop-filter glassmorphism effects, mouse-driven hardware-accelerated tilt transformations (`perspective: 1200px`), interactive lighting glare layers, dynamic theme token selection, and responsive grid reflow.
 
-## 2. How is it used?
-Include `style.css` in your webpage and structure your card markup inside a container with class `.card-deck` using individual `.holo-card` elements.
+## How is it used?
+1. Include the `style.css` in your HTML file or import it into your CSS stylesheet.
+2. Structure your card deck using semantic HTML elements (`<article class="holo-card">`).
+3. (Optional) Use the provided lightweight JavaScript event listeners to attach dynamic mouse coordinates (`--mouse-x`, `--mouse-y`, `--rot-x`, `--rot-y`) for 3D tilt tracking and theme toggling.
 
 ```html
-<link rel="stylesheet" href="style.css">
-
-<div class="card-deck">
-  <article class="holo-card">
-    <div class="holo-shimmer"></div>
-    <div class="card-content">
-      <h2>Card Title</h2>
-    </div>
-  </article>
-</div>
+<article class="holo-card">
+  <div class="holo-card-inner">
+    <div class="holo-glare"></div>
+    <div class="card-badge">Web3 Protocol</div>
+    <h2 class="card-title">Quantum Ledger</h2>
+    <p class="card-desc">Zero-knowledge proof validation protocol.</p>
+  </div>
+</article>
 ```
 
-## 3. Why is it useful?
-It provides modern Web3 and fintech user interfaces with a futuristic, high-end visual aesthetic while keeping zero JavaScript dependencies and adhering to full keyboard accessibility and GPU performance standards.
+## Why is it useful?
+- **High Visual Impact**: Delivers modern glassmorphism aesthetics with dynamic 3D depth.
+- **Hardware-Accelerated**: Smooth 60fps animations utilizing GPU-promoted layer transformations.
+- **Fully Accessible**: Implements keyboard focus states, ARIA roles, and respects `prefers-reduced-motion`.
+- **Customizable**: Built using scoped CSS Custom Properties for theme tokens, blur amounts, and glare intensity.
