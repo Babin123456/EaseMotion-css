@@ -1,23 +1,28 @@
-# Cyberpunk Code Terminal View
+# Cyberpunk Code Terminal Block Component
 
-A developer-focused cyberpunk code block UI featuring CRT scanline overlays, glowing syntax highlighting, and a blinking monospace cursor.
+A highly interactive developer code terminal component featuring tabbed syntax highlighting, custom CRT scanline overlays, line numbering, copy-to-clipboard functionality, and cyberpunk theme styling for EaseMotion-css.
 
-## 1. What does this do?
-This component renders an interactive code snippet terminal window styled with retro scanlines, window control buttons, live connection status badges, and syntax tokens.
+## What does this do?
+This component renders a sleek retro-futuristic code terminal window with multi-file code snippet tabs, syntax token highlighting, interactive copy action with visual status feedback, custom animated blinking prompt cursors, and responsive window controls.
 
-## 2. How is it used?
-Link `style.css` in your webpage and insert the code block container:
+## How is it used?
+1. Include `style.css` in your HTML web application.
+2. Markup your code block using the `.terminal-container` structure and `.code-panel` tabs.
+3. Use the lightweight tab switcher script to allow toggling between code files.
 
 ```html
-<link rel="stylesheet" href="style.css">
-
-<div class="terminal-window">
-  <div class="scanlines"></div>
+<div class="terminal-container">
+  <div class="terminal-header">
+    <div class="terminal-title">ease-motion-cli</div>
+  </div>
   <div class="terminal-body">
-    <pre><code><span class="kwd">import</span> motion...</code></pre>
+    <pre class="code-block"><code><span class="token-keyword">const</span> ease = true;</code></pre>
   </div>
 </div>
 ```
 
-## 3. Why is it useful?
-It provides technical documentation platforms, developer portfolios, and API landing pages with an immersive cyberpunk aesthetic while preserving clear readability and accessibility standards.
+## Why is it useful?
+- **Developer Documentation Ready**: Perfect for displaying code samples in open-source docs or technical landing pages.
+- **Interactive UX**: Built-in tab switching and instant clipboard copying.
+- **Theme Engine Tokens**: Powered by CSS Custom Properties for easy theme customization.
+- **Performant**: CRT scanlines and cursor pulse use GPU-composited CSS keyframe animations.
