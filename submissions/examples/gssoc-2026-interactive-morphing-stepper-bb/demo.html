@@ -3,87 +3,148 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Morphing Stepper - EaseMotion CSS Showcase</title>
+  <meta name="description" content="Interactive Morphing Stepper Component with Clip-Path Animations for EaseMotion-css">
+  <title>Interactive Morphing Stepper | EaseMotion CSS</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="stepper-wrapper">
     <header class="stepper-header">
-      <h1 class="stepper-title">Multi-Step Interactive Stepper</h1>
-      <p class="stepper-subtitle">Morphing step connectors, ripple validation &amp; form panel transitions.</p>
+      <div class="badge">EaseMotion Component</div>
+      <h1>Interactive <span>Morphing</span> Stepper</h1>
+      <p>A multi-step progress component featuring smooth CSS clip-path morphing, active state ripples, and full keyboard accessibility.</p>
     </header>
 
-    <div class="stepper-card">
-      <div class="stepper-bar" role="tablist" aria-label="Registration Progress">
-        <div class="step-node active" data-step="1" role="tab">
-          <span class="step-num">1</span>
-          <span class="step-label">Account</span>
-        </div>
-        <div class="step-line"><div class="line-progress" id="progressLine"></div></div>
-        <div class="step-node" data-step="2" role="tab">
-          <span class="step-num">2</span>
-          <span class="step-label">Profile</span>
-        </div>
-        <div class="step-line"></div>
-        <div class="step-node" data-step="3" role="tab">
-          <span class="step-num">3</span>
-          <span class="step-label">Complete</span>
-        </div>
-      </div>
-
-      <div class="stepper-content">
-        <div class="step-panel active" id="panel1">
-          <h3>Account Setup</h3>
-          <div class="form-group">
-            <label>Work Email</label>
-            <input type="email" class="step-input" placeholder="alex@developer.io">
+    <div class="stepper-container" role="region" aria-label="Multi-step progress tracker">
+      <ol class="stepper-list">
+        <!-- Step 1 -->
+        <li class="step-item active" data-step="1" aria-current="step">
+          <div class="step-circle">
+            <span class="step-num">1</span>
+            <span class="step-check" aria-hidden="true">✓</span>
           </div>
-          <button class="step-btn next-btn" id="nextBtn1">Continue to Profile &rarr;</button>
-        </div>
-
-        <div class="step-panel" id="panel2">
-          <h3>Profile Details</h3>
-          <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" class="step-input" placeholder="Alex Morgan">
+          <div class="step-details">
+            <span class="step-title">Account</span>
+            <span class="step-subtitle">Setup Credentials</span>
           </div>
-          <div class="btn-row">
-            <button class="step-btn prev-btn" id="prevBtn2">&larr; Back</button>
-            <button class="step-btn next-btn" id="nextBtn2">Finalize Setup &rarr;</button>
-          </div>
-        </div>
+        </li>
 
-        <div class="step-panel" id="panel3">
-          <h3>🎉 Setup Completed!</h3>
-          <p>Your workspace environment has been initialized with EaseMotion CSS tokens.</p>
-          <button class="step-btn next-btn" onclick="location.reload()">Start Over</button>
-        </div>
+        <li class="step-connector" aria-hidden="true"><div class="connector-progress"></div></li>
+
+        <!-- Step 2 -->
+        <li class="step-item" data-step="2">
+          <div class="step-circle">
+            <span class="step-num">2</span>
+            <span class="step-check" aria-hidden="true">✓</span>
+          </div>
+          <div class="step-details">
+            <span class="step-title">Profile</span>
+            <span class="step-subtitle">Personal Details</span>
+          </div>
+        </li>
+
+        <li class="step-connector" aria-hidden="true"><div class="connector-progress"></div></li>
+
+        <!-- Step 3 -->
+        <li class="step-item" data-step="3">
+          <div class="step-circle">
+            <span class="step-num">3</span>
+            <span class="step-check" aria-hidden="true">✓</span>
+          </div>
+          <div class="step-details">
+            <span class="step-title">Security</span>
+            <span class="step-subtitle">Two-Factor Auth</span>
+          </div>
+        </li>
+
+        <li class="step-connector" aria-hidden="true"><div class="connector-progress"></div></li>
+
+        <!-- Step 4 -->
+        <li class="step-item" data-step="4">
+          <div class="step-circle">
+            <span class="step-num">4</span>
+            <span class="step-check" aria-hidden="true">✓</span>
+          </div>
+          <div class="step-details">
+            <span class="step-title">Complete</span>
+            <span class="step-subtitle">Launch Dashboard</span>
+          </div>
+        </li>
+      </ol>
+
+      <!-- Interactive Step Controls -->
+      <div class="stepper-controls">
+        <button class="ctrl-btn" id="prev-btn" disabled aria-label="Go to previous step">Previous</button>
+        <div class="step-indicator-text" id="status-text">Step 1 of 4: Account Setup</div>
+        <button class="ctrl-btn primary" id="next-btn" aria-label="Proceed to next step">Next Step</button>
       </div>
     </div>
   </div>
 
   <script>
-    const steps = document.querySelectorAll('.step-node');
-    const panels = document.querySelectorAll('.step-panel');
-    const progressLine = document.getElementById('progressLine');
+    let currentStep = 1;
+    const totalSteps = 4;
 
-    function goToStep(stepNum) {
-      steps.forEach((node, idx) => {
-        if (idx < stepNum) node.classList.add('completed', 'active');
-        else if (idx === stepNum - 1) node.classList.add('active');
-        else node.classList.remove('active', 'completed');
+    const stepItems = document.querySelectorAll('.step-item');
+    const connectors = document.querySelectorAll('.connector-progress');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const statusText = document.getElementById('status-text');
+
+    const stepTitles = [
+      'Account Setup',
+      'Personal Details',
+      'Two-Factor Auth',
+      'Dashboard Launch Ready'
+    ];
+
+    function updateStepper() {
+      stepItems.forEach((item, index) => {
+        const stepNum = index + 1;
+        item.classList.remove('active', 'completed');
+        item.removeAttribute('aria-current');
+
+        if (stepNum === currentStep) {
+          item.classList.add('active');
+          item.setAttribute('aria-current', 'step');
+        } else if (stepNum < currentStep) {
+          item.classList.add('completed');
+        }
       });
 
-      panels.forEach((p, idx) => {
-        p.classList.toggle('active', idx === stepNum - 1);
+      connectors.forEach((conn, index) => {
+        if (index < currentStep - 1) {
+          conn.style.width = '100%';
+        } else {
+          conn.style.width = '0%';
+        }
       });
 
-      progressLine.style.width = stepNum === 2 ? '50%' : stepNum === 3 ? '100%' : '0%';
+      prevBtn.disabled = currentStep === 1;
+      if (currentStep === totalSteps) {
+        nextBtn.textContent = 'Finish';
+      } else {
+        nextBtn.textContent = 'Next Step';
+      }
+
+      statusText.textContent = `Step ${currentStep} of ${totalSteps}: ${stepTitles[currentStep - 1]}`;
     }
 
-    document.getElementById('nextBtn1').addEventListener('click', () => goToStep(2));
-    document.getElementById('nextBtn2').addEventListener('click', () => goToStep(3));
-    document.getElementById('prevBtn2').addEventListener('click', () => goToStep(1));
+    prevBtn.addEventListener('click', () => {
+      if (currentStep > 1) {
+        currentStep--;
+ updateStepper();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentStep < totalSteps) {
+        currentStep++;
+        updateStepper();
+      } else {
+        alert('Workflow completed successfully!');
+      }
+    });
   </script>
 </body>
 </html>
