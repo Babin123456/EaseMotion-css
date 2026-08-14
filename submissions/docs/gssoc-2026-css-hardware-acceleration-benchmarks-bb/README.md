@@ -1,16 +1,29 @@
-# CSS Hardware Acceleration & Composite Layer Benchmarks
+# CSS Hardware Acceleration & Animation Benchmarks
 
-A developer guide and diagnostic visualizer component for EaseMotion CSS analyzing GPU layer promotion, composite thread rendering, and 60 FPS animation performance.
+An engineering documentation guide and interactive benchmark playground evaluating GPU Compositor layer promotion vs CPU layout reflow performance in EaseMotion-css.
 
-## 1. What does this do?
-This guide illustrates the performance differential between CPU layout recalculations (animating `top`, `left`, `margin`) vs GPU hardware acceleration (animating `transform: translate3d()` and `opacity`).
+## What does this do?
+This benchmark guide analyzes browser rendering pipeline mechanics (Recalculate Style -> Layout -> Paint -> Composite). It provides interactive visual demonstrations comparing compositing-only properties (`transform`, `opacity`, `will-change`) against layout-thrashing properties (`top`, `left`, `margin`).
 
-## 2. How is it used?
-1. Inspect the benchmark visualizer in `demo.html`.
-2. Apply `transform: translate3d()` and `will-change: transform` to promote critical keyframe elements to GPU compositing layers.
-3. Verify frame rates using Chrome DevTools Performance monitor.
+## How is it used?
+Optimize CSS animation rules by targeting GPU compositor properties:
 
-## 3. Why is it useful?
-- **Jank Prevention**: Prevents main-thread layout thrashing during continuous animation loops.
-- **60 FPS Mobile Performance**: Ensures smooth motion on low-powered mobile processors.
-- **Developer Education**: Provides clear best practice rules for building performant CSS components.
+```css
+/* Recommended: GPU Compositor Promotion */
+.gpu-accelerated {
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.3s ease;
+}
+
+/* Avoid: CPU Reflow Trigger */
+.cpu-thrash {
+  position: absolute;
+  transition: left 0.3s ease; /* Triggers Layout & Paint recalculations */
+}
+```
+
+## Why is it useful?
+- **Prevents Frame Drops**: Eliminates jank and stutter on mobile devices and low-power hardware.
+- **Battery & Performance Friendly**: Offloads rendering computations from the main thread to dedicated GPU cores.
+- **Maintainer Guidelines**: Establishes performance criteria for all motion contributions submitted to EaseMotion-css.

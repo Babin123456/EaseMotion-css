@@ -1,182 +1,200 @@
-/* EaseMotion CSS - Hardware Acceleration & Composite Layer Benchmarks */
-
+/* CSS Hardware Acceleration & Performance Benchmarks CSS */
 :root {
-  --gpu-bg: #090d16;
-  --card-bg: rgba(15, 23, 42, 0.85);
-  --border-color: rgba(255, 255, 255, 0.12);
-  --accent-cyan: #06b6d4;
-  --accent-red: #ef4444;
-  --accent-green: #10b981;
-  --text-main: #f8fafc;
-  --text-dim: #94a3b8;
+  --bg-dark: #08090d;
+  --panel-bg: #12151e;
+  --accent-cyan: #00ffcc;
+  --accent-purple: #9d50bb;
+  --text-main: #f0f4f8;
+  --text-muted: #8492a6;
+  --border-color: rgba(255, 255, 255, 0.1);
+  --font-family: system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  padding: 3rem 1.5rem;
-  min-height: 100vh;
-  background: radial-gradient(circle at center, #1e1b4b, #090d16 80%);
+  background-color: var(--bg-dark);
   color: var(--text-main);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: var(--font-family);
+  min-height: 100vh;
+  padding: 2rem 1rem;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-.gpu-container {
-  max-width: 860px;
+.benchmark-container {
+  max-width: 900px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-.gpu-header {
+.benchmark-header {
   text-align: center;
-  margin-bottom: 3rem;
 }
 
-.gpu-title {
-  font-size: 2.25rem;
-  font-weight: 800;
-  margin: 0 0 0.5rem 0;
-  background: linear-gradient(135deg, var(--accent-cyan), #a855f7);
+.badge {
+  display: inline-block;
+  background: rgba(0, 255, 204, 0.1);
+  color: var(--accent-cyan);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.benchmark-header h1 span {
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.gpu-subtitle {
-  color: var(--text-dim);
-  font-size: 1rem;
-  margin: 0;
+.benchmark-header p {
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
 }
 
-.benchmark-grid {
+.metrics-dashboard {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
 }
 
-.bench-card {
-  background: var(--card-bg);
-  backdrop-filter: blur(16px);
+.metric-card {
+  background: var(--panel-bg);
   border: 1px solid var(--border-color);
-  border-radius: 20px;
-  padding: 2rem;
+  padding: 1.25rem;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
-.bench-card.unoptimized {
-  border-color: rgba(239, 68, 68, 0.4);
+.metric-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 
-.bench-card.optimized {
-  border-color: rgba(16, 185, 129, 0.4);
-}
-
-.card-tag {
-  display: inline-block;
-  align-self: flex-start;
-  font-size: 0.75rem;
-  font-weight: 700;
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-  margin-bottom: 1rem;
-}
-
-.card-tag.bad {
-  background: rgba(239, 68, 68, 0.15);
-  color: #f87171;
-  border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
-.card-tag.good {
-  background: rgba(16, 185, 129, 0.15);
-  color: #34d399;
-  border: 1px solid rgba(16, 185, 129, 0.3);
-}
-
-.bench-card h3 {
-  margin: 0 0 0.5rem 0;
+.metric-value {
   font-size: 1.2rem;
-}
-
-.bench-card p {
-  color: var(--text-dim);
-  font-size: 0.9rem;
-  line-height: 1.5;
-  margin: 0 0 1.5rem 0;
-}
-
-.box-track {
-  height: 60px;
-  background: rgba(2, 6, 23, 0.6);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 1rem;
-}
-
-.moving-box {
-  width: 100px;
-  height: 40px;
-  border-radius: 8px;
-  position: absolute;
-  top: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #fff;
-}
-
-.cpu-box {
-  background: #dc2626;
-  animation: moveCpu 2.5s infinite linear;
-}
-
-.gpu-box {
-  background: #059669;
-  will-change: transform;
-  animation: moveGpu 2.5s infinite linear;
-}
-
-@keyframes moveCpu {
-  0% { left: 10px; }
-  50% { left: calc(100% - 110px); }
-  100% { left: 10px; }
-}
-
-@keyframes moveGpu {
-  0% { transform: translate3d(10px, 0, 0); }
-  50% { transform: translate3d(calc(100% - 110px), 0, 0); }
-  100% { transform: translate3d(10px, 0, 0); }
-}
-
-.metric-status {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-dim);
-}
-
-.token-guide {
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  padding: 1.5rem;
-}
-
-.token-guide h2 {
-  margin: 0 0 1rem 0;
-  font-size: 1.1rem;
+  font-weight: 800;
   color: var(--accent-cyan);
 }
 
-.token-guide ul {
-  margin: 0;
+.status-promoted { color: #00ffcc; }
+.risk-low { color: #4facfe; }
+
+.benchmark-controls {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.mode-btn {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.75rem 1.25rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.25s ease;
+}
+
+.mode-btn:hover,
+.mode-btn.active {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.2);
+}
+
+.benchmark-stage {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  height: 220px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+}
+
+.benchmark-box {
+  width: 180px;
+  padding: 1rem;
+  border-radius: 12px;
+  color: #000;
+  font-weight: bold;
+  font-size: 0.85rem;
+  text-align: center;
+  position: relative;
+}
+
+.gpu-mode {
+  background: linear-gradient(135deg, var(--accent-cyan), #4facfe);
+  will-change: transform;
+  animation: gpuTranslate 2s infinite ease-in-out alternate;
+}
+
+@keyframes gpuTranslate {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(400px, 0, 0); }
+}
+
+.cpu-mode {
+  background: linear-gradient(135deg, #ff4b4b, #ff8c42);
+  position: absolute;
+  animation: cpuTopLeft 2s infinite ease-in-out alternate;
+}
+
+@keyframes cpuTopLeft {
+  0% { left: 20px; }
+  100% { left: 420px; }
+}
+
+.layer-tag {
+  font-size: 0.7rem;
+  margin-top: 0.4rem;
+  opacity: 0.8;
+}
+
+.benchmark-docs {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.benchmark-docs h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.benchmark-docs ul {
   padding-left: 1.25rem;
-  color: #cbd5e1;
-  font-size: 0.95rem;
-  line-height: 1.8;
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+  @keyframes gpuTranslate {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(120px, 0, 0); }
+  }
+  @keyframes cpuTopLeft {
+    0% { left: 10px; }
+    100% { left: 130px; }
+  }
 }

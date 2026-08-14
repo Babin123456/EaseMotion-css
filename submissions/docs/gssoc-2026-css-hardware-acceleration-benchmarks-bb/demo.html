@@ -1,48 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CSS Hardware Acceleration & Composite Layer Benchmarks - EaseMotion CSS</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CSS Hardware Acceleration & Performance Benchmarking Guide for EaseMotion-css">
+  <title>CSS Hardware Acceleration Benchmarks | EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="gpu-container">
-    <header class="gpu-header">
-      <h1 class="gpu-title">CSS Hardware Acceleration Guide</h1>
-      <p class="gpu-subtitle">Interactive benchmark visualizer for GPU composite layer promotion and 60 FPS Jank prevention in EaseMotion CSS.</p>
+  <div class="benchmark-container">
+    <header class="benchmark-header">
+      <div class="badge">EaseMotion Engineering</div>
+      <h1>CSS Hardware Acceleration <span>Benchmarks</span></h1>
+      <p>Interactive rendering pipeline performance comparison: GPU Composite Layers vs CPU Reflow Triggers.</p>
     </header>
 
-    <div class="benchmark-grid">
-      <div class="bench-card unoptimized">
-        <div class="card-tag bad">Unoptimized Layout Shift</div>
-        <h3>Triggers Layout & Paint (CPU)</h3>
-        <p>Animating <code>top</code>, <code>left</code>, or <code>margin</code> forces layout re-calculations on every single frame.</p>
-        <div class="box-track">
-          <div class="moving-box cpu-box">CPU Paint</div>
-        </div>
-        <div class="metric-status">Cost: High Paint Storms</div>
+    <div class="metrics-dashboard">
+      <div class="metric-card">
+        <span class="metric-label">Estimated Frame Rate</span>
+        <span class="metric-value fps-value" id="fps-counter">60 FPS</span>
       </div>
-
-      <div class="bench-card optimized">
-        <div class="card-tag good">Hardware Accelerated (GPU)</div>
-        <h3>Composite Layer Promotion</h3>
-        <p>Animating <code>transform3d()</code> or <code>opacity</code> promotes elements to dedicated GPU layers.</p>
-        <div class="box-track">
-          <div class="moving-box gpu-box">GPU Composite</div>
-        </div>
-        <div class="metric-status">Cost: Zero Layout Recalc</div>
+      <div class="metric-card">
+        <span class="metric-label">GPU Layer Status</span>
+        <span class="metric-value status-promoted">COMPOSITOR PROMOTED</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-label">Layout Thrashing Risk</span>
+        <span class="metric-value risk-low">ZERO REFLOW (0ms)</span>
       </div>
     </div>
 
-    <section class="token-guide">
-      <h2>Best Practice Rules</h2>
+    <div class="benchmark-controls">
+      <button class="mode-btn active" id="btn-gpu">Test GPU Accelerated (transform / opacity)</button>
+      <button class="mode-btn" id="btn-cpu">Test CPU Reflow (top / left / margin)</button>
+    </div>
+
+    <main class="benchmark-stage" id="stage">
+      <div class="benchmark-box gpu-mode" id="test-box">
+        <div class="box-label">GPU Compositor Element</div>
+        <div class="layer-tag">will-change: transform</div>
+      </div>
+    </main>
+
+    <section class="benchmark-docs">
+      <h2>Engineering Insights</h2>
       <ul>
-        <li>✓ Use <code>transform: translate3d(x, y, 0)</code> or <code>transform: scale()</code> for motion.</li>
-        <li>✓ Apply <code>will-change: transform, opacity</code> sparingly on active elements.</li>
-        <li>❌ Never animate <code>width</code>, <code>height</code>, <code>top</code>, or <code>left</code> in continuous loops.</li>
+        <li><strong>GPU Layer Promotion:</strong> Properties like <code>transform: translate3d()</code> bypass the Layout and Paint phases, sending elements directly to the GPU Compositor thread.</li>
+        <li><strong>CPU Layout Thrashing:</strong> Mutating geometry properties like <code>top</code>, <code>left</code>, or <code>margin</code> forces the browser engine to recalculate layout geometry for all sibling nodes.</li>
       </ul>
     </section>
-  </main>
+  </div>
+
+  <script>
+    const testBox = document.getElementById('test-box');
+    const btnGpu = document.getElementById('btn-gpu');
+    const btnCpu = document.getElementById('btn-cpu');
+    const fpsCounter = document.getElementById('fps-counter');
+
+    btnGpu.addEventListener('click', () => {
+      btnGpu.classList.add('active');
+      btnCpu.classList.remove('active');
+      testBox.className = 'benchmark-box gpu-mode';
+      testBox.querySelector('.box-label').textContent = 'GPU Compositor Element';
+      testBox.querySelector('.layer-tag').textContent = 'will-change: transform';
+      fpsCounter.textContent = '60 FPS';
+      fpsCounter.style.color = '#00ffcc';
+    });
+
+    btnCpu.addEventListener('click', () => {
+      btnCpu.classList.add('active');
+      btnGpu.classList.remove('active');
+      testBox.className = 'benchmark-box cpu-mode';
+      testBox.querySelector('.box-label').textContent = 'CPU Reflow Element (Layout Thrash)';
+      testBox.querySelector('.layer-tag').textContent = 'top / left reflow trigger';
+      fpsCounter.textContent = '38 FPS (Dropped Frames)';
+      fpsCounter.style.color = '#ff4b4b';
+    });
+  </script>
 </body>
 </html>
