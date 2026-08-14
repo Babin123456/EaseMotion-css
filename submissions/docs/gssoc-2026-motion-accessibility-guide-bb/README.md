@@ -1,16 +1,28 @@
-# WCAG Motion Accessibility & Prefers-Reduced-Motion Guide
+# Motion Accessibility & Reduced-Motion Integration Guide
 
-A comprehensive documentation guide and interactive visualizer for WCAG 2.1 motion accessibility compliance and `prefers-reduced-motion` CSS media query overrides in EaseMotion CSS.
+A comprehensive architectural guide and interactive diagnostic component for implementing accessible web animations and handling `prefers-reduced-motion` media queries in EaseMotion-css.
 
-## 1. What does this do?
-This documentation guide demonstrates how to implement non-vestibular motion fallbacks using CSS `@media (prefers-reduced-motion: reduce)`. It compares standard 60 FPS transform keyframe animations against reduced opacity fade profiles for user comfort.
+## What does this do?
+This documentation guide demonstrates how to build accessible CSS animations that respect vestibular safety guidelines. It includes an interactive system media query detector, simulation toggle, safe opacity fade fallback patterns, and code snippets for WCAG 2.2 Criterion 2.3.3 compliance.
 
-## 2. How is it used?
-1. Review the implementation patterns in `demo.html` and `style.css`.
-2. Wrap complex CSS `@keyframes` and 3D transforms inside `@media (prefers-reduced-motion: no-preference)` or provide fallback overrides under `prefers-reduced-motion: reduce`.
-3. Test locally by enabling "Reduce Motion" in your OS accessibility preferences.
+## How is it used?
+Apply the `@media (prefers-reduced-motion: reduce)` CSS media query wrapper around motion-heavy CSS keyframes:
 
-## 3. Why is it useful?
-- **WCAG 2.1 Compliance**: Protects users with vestibular motion disorders or motion sickness sensitivities.
-- **Production Standard**: Ensures EaseMotion CSS animations conform to enterprise accessibility requirements.
-- **Easy Fallbacks**: Demonstrates low-effort CSS overrides with zero JavaScript dependencies.
+```css
+/* Standard smooth animation */
+.animated-element {
+  animation: slideIn 0.5s ease-out;
+}
+
+/* Reduced motion preference override */
+@media (prefers-reduced-motion: reduce) {
+  .animated-element {
+    animation: fadeIn 0.2s ease-out; /* Safe fallback */
+  }
+}
+```
+
+## Why is it useful?
+- **WCAG Compliance**: Helps developers meet accessibility standards for users sensitive to motion.
+- **Vestibular Safety**: Reduces risks of motion-induced vertigo, nausea, and disorientation.
+- **Best Practices**: Provides actionable code patterns for open-source component authors in EaseMotion-css.

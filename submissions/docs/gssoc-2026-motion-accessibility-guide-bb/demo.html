@@ -1,46 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WCAG Motion Accessibility & Prefers-Reduced-Motion Guide - EaseMotion CSS</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Motion Accessibility & Reduced-Motion Integration Guide for EaseMotion-css">
+  <title>Motion Accessibility & Reduced-Motion Guide | EaseMotion CSS</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="a11y-container">
-    <header class="a11y-header">
-      <h1 class="a11y-title">WCAG Motion Accessibility Guide</h1>
-      <p class="a11y-subtitle">Interactive visualizer for prefers-reduced-motion media query compliance in EaseMotion CSS.</p>
+  <div class="guide-container">
+    <header class="guide-header">
+      <div class="badge">EaseMotion-css Docs</div>
+      <h1>Web Motion <span>Accessibility</span> Guide</h1>
+      <p>A comprehensive guide and interactive playground for implementing WCAG 2.2 compliant web animations and <code>prefers-reduced-motion</code> media queries.</p>
     </header>
 
+    <div class="diagnostic-panel" role="region" aria-label="System motion preference diagnostic">
+      <div class="status-indicator">
+        <span class="pulse-ring" id="motion-dot"></span>
+        <span class="status-text" id="motion-status">Detecting system motion settings...</span>
+      </div>
+      <button class="test-toggle-btn" id="simulate-toggle">Simulate Reduced Motion Mode</button>
+    </div>
+
     <section class="demo-grid">
-      <div class="demo-card">
-        <h3>Standard Motion Profile</h3>
-        <p>Full 60 FPS keyframe rotations, spring physics, and continuous pulse animations for standard display environments.</p>
-        <div class="anim-box standard-anim">
-          <span class="icon">💫</span>
+      <!-- Demo Box 1: Standard Animation vs Reduced Motion -->
+      <article class="demo-card">
+        <h3>1. Parallax & Large Movement</h3>
+        <p class="card-desc">Rapid spatial movements can induce motion sickness in users with vestibular disorders.</p>
+        <div class="animation-stage">
+          <div class="animated-box bounce-motion">Bouncing Element</div>
         </div>
-      </div>
-
-      <div class="demo-card">
-        <h3>Reduced Motion Profile (WCAG 2.1)</h3>
-        <p>Replaces heavy transforms and loops with subtle opacity fades when system reduced motion is enabled.</p>
-        <div class="anim-box reduced-anim">
-          <span class="icon">✨</span>
+        <div class="code-preview">
+          <code>@media (prefers-reduced-motion: reduce) {<br>&nbsp;&nbsp;.bounce-motion { animation: none; transform: none; }<br>}</code>
         </div>
-      </div>
-    </section>
+      </article>
 
-    <section class="code-guide">
-      <h2>Implementation Pattern</h2>
-      <pre><code>@media (prefers-reduced-motion: reduce) {
-  .ease-motion-element {
-    animation: simpleFade 0.2s ease-in-out !important;
-    transform: none !important;
-    transition: opacity 0.2s ease !important;
-  }
-}</code></pre>
+      <!-- Demo Box 2: Safe Fade Fallback -->
+      <article class="demo-card">
+        <h3>2. Opacity Fade Fallback</h3>
+        <p class="card-desc">Replaces intense scaling or spin transitions with subtle, safe cross-fades.</p>
+        <div class="animation-stage">
+          <div class="animated-box fade-motion">Safe Fade Element</div>
+        </div>
+        <div class="code-preview">
+          <code>/* Safe cross-fade fallback preserves state transition clarity */</code>
+        </div>
+      </article>
     </section>
-  </main>
+  </div>
+
+  <script>
+    const statusText = document.getElementById('motion-status');
+    const simulateBtn = document.getElementById('simulate-toggle');
+    const container = document.querySelector('.guide-container');
+
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    function updateMotionStatus() {
+      if (mediaQuery.matches || container.classList.contains('force-reduced')) {
+        statusText.textContent = 'System Preference: REDUCED MOTION ACTIVE (Animations Safely Subdued)';
+        statusText.style.color = '#00ffcc';
+      } else {
+        statusText.textContent = 'System Preference: STANDARD MOTION (Full Animations Enabled)';
+        statusText.style.color = '#4facfe';
+      }
+    }
+
+    updateMotionStatus();
+    mediaQuery.addEventListener('change', updateMotionStatus);
+
+    simulateBtn.addEventListener('click', () => {
+      container.classList.toggle('force-reduced');
+      updateMotionStatus();
+    });
+  </script>
 </body>
 </html>
